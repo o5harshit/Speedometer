@@ -25,7 +25,7 @@ Build a **real-time, Dockerized speedometer application** that:
                │ Displays live speed data │
                └──────────▲───────────────┘
                           │ WebSocket (Real-Time)
-                          │ REST API (Optional)
+                          │ REST API 
                ┌──────────┴───────────────┐
                │   Node.js Backend        │
                │  (Docker Container 2)    │
@@ -36,7 +36,7 @@ Build a **real-time, Dockerized speedometer application** that:
                ┌──────────┴───────────────┐
                │        MySQL DB          │
                │   (Dockerized Service)   │
-               │ Port: 3307 (host)        │
+               │      │
                └──────────────────────────┘
 ---
 
@@ -94,23 +94,23 @@ Navigate into your **server** folder:
 ```bash
 cd server
 docker-compose up -d --build
-
 ```
 
-This command:
+when you run the above command it will do the following things :
 
-Builds your backend image (node-app:dev)
+1) Builds your backend image (node-app:dev)
 
-Starts two containers:
+2) Starts two containers:
 
-Node.js server (nodeapp)
+3) Node.js server (nodeapp)
 
-MySQL database (mysqldb)
+4) MySQL database (mysqldb)
 
-```bash
+``` bash
 docker ps
 ```
-✅ You should see both nodeapp and mysqldb running.
+
+✅ The above command will help you to see both nodeapp and mysqldb running or not.
 
 Step 2: Navigate into your client folder:
 
@@ -120,9 +120,8 @@ docker build -t react-app:dev .
 docker run -p 5173:5173 react-app:dev
 ```
 
-Your frontend is now live at:
+The above command will run your frontend :
 👉 http://localhost:5173
-
 
 | Service  | Container     | Host Port | Description             |
 | -------- | ------------- | --------- | ----------------------- |
@@ -130,15 +129,13 @@ Your frontend is now live at:
 | Backend  | node-app:dev  | 8747      | Node.js API + Socket.io |
 | MySQL    | mysql:8.0     | 3307      | Database                |
 
-
 🧠 How It Works
 
-Sensor Simulation (sensorSimulator.js) inserts random speed data (0–179 km/h) into MySQL every 1 second.
+1) Inserts random speed data (0–179 km/h) into MySQL every 1 second.
 
-Backend (Node.js) fetches the latest speed and emits it via Socket.io to all connected clients.
+2) Backend (Node.js) fetches the latest speed and emits it via Socket.io to all connected clients.
 
-Frontend (React) connects through WebSocket and updates the live speedometer instantly.
-
+3) Frontend (React) connects through WebSocket and updates the live speedometer instantly.
 
 🧱 Strategy & Key Design Decisions
 
@@ -156,11 +153,9 @@ Simplifies scaling and maintenance.
 
 🔹 Data Flow
 
-Simulator inserts data into MySQL.
-
-Node.js fetches and broadcasts via WebSocket.
-
-React updates speedometer instantly.
+1) Generate random speed using Javascript and then emit it to frontend using websockets.
+2) Then save the speed in the Database.
+3) React updates speedometer instantly.
 
 🔹 Scalability
 
@@ -168,24 +163,29 @@ Independent containerization allows horizontal scaling (e.g., multiple Node.js i
 
 Easily deployable to AWS ECS, Azure Container Apps, or Render.
 
-
+| Challenge                       | Solution                                               |
+| ------------------------------- | ------------------------------------------------------ |
+| Maintain real-time updates      | Used WebSockets (Socket.io) for instant client updates |
+| Synchronizing DB writes & emits | Used 1-sec interval loop emitting latest DB record     |
+| Networking between containers   | Used Docker bridge network and service names           |
+| Environment reproducibility     | Docker Compose for single-command setup                |
+| Avoiding rebuild overhead       | `.dockerignore` + cached layers for efficient builds   |
 
 🧭 Challenges Addressed & Opportunities
-
 Challenges
 
-Building real-time data flow between frontend and backend.
+1) Building real-time data flow between frontend and backend.
 
-Managing multi-container communication.
+2) Managing multi-container communication.
 
-Ensuring consistent setup across systems.
+3) Ensuring consistent setup across systems.
 
 Opportunities
 
-Scalable microservice architecture.
+1) Scalable  architecture.
 
-Demonstrates practical DevOps (Docker) knowledge.
+2) Demonstrates practical DevOps (Docker) knowledge.
 
-Easily extendable for analytics dashboards or IoT sensor data.
+3) Easily extendable for analytics dashboards or IoT sensor data.
 
 
