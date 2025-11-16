@@ -93,7 +93,9 @@ Speedometer/
 Navigate into your **server** folder:
 ```bash
 cd server
-docker-compose up -d --build 
+docker-compose up -d --build
+
+```
 
 This command:
 
@@ -105,24 +107,29 @@ Node.js server (nodeapp)
 
 MySQL database (mysqldb)
 
+```bash
 docker ps
+```
 ✅ You should see both nodeapp and mysqldb running.
 
-Navigate into your client folder:
+Step 2: Navigate into your client folder:
 
+```bash
 cd client
 docker build -t react-app:dev .
 docker run -p 5173:5173 react-app:dev
-
+```
 
 Your frontend is now live at:
 👉 http://localhost:5173
+
 
 | Service  | Container     | Host Port | Description             |
 | -------- | ------------- | --------- | ----------------------- |
 | Frontend | react-app:dev | 5173      | React UI (Speedometer)  |
 | Backend  | node-app:dev  | 8747      | Node.js API + Socket.io |
 | MySQL    | mysql:8.0     | 3307      | Database                |
+
 
 🧠 How It Works
 
@@ -131,6 +138,7 @@ Sensor Simulation (sensorSimulator.js) inserts random speed data (0–179 km/h) 
 Backend (Node.js) fetches the latest speed and emits it via Socket.io to all connected clients.
 
 Frontend (React) connects through WebSocket and updates the live speedometer instantly.
+
 
 🧱 Strategy & Key Design Decisions
 
@@ -160,15 +168,10 @@ Independent containerization allows horizontal scaling (e.g., multiple Node.js i
 
 Easily deployable to AWS ECS, Azure Container Apps, or Render.
 
-| Challenge                       | Solution                                               |
-| ------------------------------- | ------------------------------------------------------ |
-| Maintain real-time updates      | Used WebSockets (Socket.io) for instant client updates |
-| Synchronizing DB writes & emits | Used 1-sec interval loop emitting latest DB record     |
-| Networking between containers   | Used Docker bridge network and service names           |
-| Environment reproducibility     | Docker Compose for single-command setup                |
-| Avoiding rebuild overhead       | `.dockerignore` + cached layers for efficient builds   |
+
 
 🧭 Challenges Addressed & Opportunities
+
 Challenges
 
 Building real-time data flow between frontend and backend.
