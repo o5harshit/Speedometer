@@ -141,45 +141,41 @@ The above command will run your frontend :
 
 🔹 Real-Time Communication
 
-Used Socket.io for live data push instead of polling.
-Ensures the frontend receives updates instantly without extra network load.
+  1) Used Socket.io for live data push instead of polling.
+  2) Ensures the frontend receives updates instantly without extra network load.
 
 🔹 Multi-Container Setup
 
-Frontend, backend, and database isolated into separate containers.
-
-Simplifies scaling and maintenance.
-
+  1) Frontend, backend, and database isolated into separate containers.
+  2) Simplifies scaling and maintenance.
 
 🔹 Data Flow
 
-1) Generate random speed using Javascript and then emit it to frontend using websockets.
-2) Then save the speed in the Database.
-3) React updates speedometer instantly.
+ 1) Generate random speed using Javascript and then emit it to frontend using websockets.
+ 2) Then save the speed in the Database.
+ 3) React updates speedometer instantly.
 
 🔹 Scalability
 
-1) Independent containerization allows horizontal scaling (e.g., multiple Node.js instances behind a load balancer).
-
-2) Easily deployable to AWS ECS, Azure Container Apps, or Render.
-
+ 1) Independent containerization allows horizontal scaling (e.g., multiple Node.js instances behind a load balancer).
+ 2) Easily deployable to AWS ECS, Azure Container Apps, or Render.
 
 🧭 Challenges Addressed & Opportunities
 
  * Challenges
  
-1) Building real-time data flow between frontend and backend.
+  1) Building real-time data flow between frontend and backend.
 
-2) Managing multi-container communication.
+  2) Managing multi-container communication.
 
-3) Ensuring consistent setup across systems.
+  3) Ensuring consistent setup across systems.
 
 * Opportunities
 
-1) Scalable  architecture.
+  1) Scalable  architecture.
 
-2) Demonstrates practical DevOps (Docker) knowledge.
+  2) Demonstrates practical DevOps (Docker) knowledge.
 
-3) Easily extendable for analytics dashboards or IoT sensor data.
+  3) Easily extendable for analytics dashboards or IoT sensor data.
 
 
