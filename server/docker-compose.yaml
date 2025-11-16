@@ -1,0 +1,49 @@
+version: "3.8"
+
+services:
+  # 🧩 MySQL database
+  mysqldb:
+    container_name: mysqldb
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    restart: unless-stopped
+    ports:
+      - "3307:3306"                # MySQL runs on 3306
+    environment:
+      MYSQL_DATABASE: speeddb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: harshit123
+      MYSQL_ROOT_PASSWORD: harshit123
+      SERVICE_TAGS: prod
+      SERVICE_NAME: mysqldb
+
+    networks:
+      - internalnet
+
+  # ⚙️ Node.js backend
+  nodeapp:
+    container_name: nodeapp
+    build: .
+    image: node-app:dev
+    restart: unless-stopped
+    depends_on:
+      - mysqldb
+    ports:
+      - "8747:8747"                # Node.js runs on 8747
+    environment:
+      PORT: 8747
+      DB_HOST: mysqldb             # service name of MySQL
+      DB_USER: root
+      DB_PASSWORD: harshit123
+      DB_NAME: speeddb
+      DB_CONNECTION_LIMIT: 10
+      DB_PORT: 3306
+      SERVICE_TAGS: prod
+      SERVICE_NAME: nodeappservice
+    networks:
+      - internalnet
+
+
+networks:
+  internalnet:
+    driver: bridge

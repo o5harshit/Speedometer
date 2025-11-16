@@ -9,7 +9,7 @@ import SpeedRoutes from "./Routes/SpeedRoutes.js";
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT;
 
 app.use(cors());
 app.use(express.json());
@@ -41,7 +41,7 @@ setInterval(async () => {
   try {
     await axios.post(process.env.INSERT_SPEED_ROUTE, { speed: randomSpeed });
   } catch (error) {
-    console.error("Failed to send fake speed:", error.message);
+    console.error("Failed to send fake speed:", error);
   }
 }, 1000);
 
