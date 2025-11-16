@@ -159,9 +159,9 @@ Simplifies scaling and maintenance.
 
 🔹 Scalability
 
-Independent containerization allows horizontal scaling (e.g., multiple Node.js instances behind a load balancer).
+1) Independent containerization allows horizontal scaling (e.g., multiple Node.js instances behind a load balancer).
 
-Easily deployable to AWS ECS, Azure Container Apps, or Render.
+2) Easily deployable to AWS ECS, Azure Container Apps, or Render.
 
 
 🧭 Challenges Addressed & Opportunities
