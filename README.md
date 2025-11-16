@@ -173,7 +173,7 @@ The above command will run your frontend :
 * Opportunities
 
   1) Scalable  architecture.
-
+  
   2) Demonstrates practical DevOps (Docker) knowledge.
 
   3) Easily extendable for analytics dashboards or IoT sensor data.
