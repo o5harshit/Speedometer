@@ -163,24 +163,18 @@ Independent containerization allows horizontal scaling (e.g., multiple Node.js i
 
 Easily deployable to AWS ECS, Azure Container Apps, or Render.
 
-| Challenge                       | Solution                                               |
-| ------------------------------- | ------------------------------------------------------ |
-| Maintain real-time updates      | Used WebSockets (Socket.io) for instant client updates |
-| Synchronizing DB writes & emits | Used 1-sec interval loop emitting latest DB record     |
-| Networking between containers   | Used Docker bridge network and service names           |
-| Environment reproducibility     | Docker Compose for single-command setup                |
-| Avoiding rebuild overhead       | `.dockerignore` + cached layers for efficient builds   |
 
 🧭 Challenges Addressed & Opportunities
-Challenges
 
+ * Challenges
+ 
 1) Building real-time data flow between frontend and backend.
 
 2) Managing multi-container communication.
 
 3) Ensuring consistent setup across systems.
 
-Opportunities
+* Opportunities
 
 1) Scalable  architecture.
 
